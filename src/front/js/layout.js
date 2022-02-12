@@ -11,6 +11,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
 import Login from "./pages/login.js";
+import Private from "./pages/private.jsx";
 
 //create your first component
 const Layout = () => {
@@ -35,6 +36,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/private">
+							<Private />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>
