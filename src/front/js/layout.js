@@ -13,6 +13,8 @@ import { Footer } from "./component/footer";
 import Login from "./pages/login.js";
 import Private from "./pages/private.jsx";
 
+import Protected from "./pages/protected.jsx";
+
 //create your first component
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -39,6 +41,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/private">
 							<Private />
+						</Route>
+						<Route exact path="/protected">
+							<Protected />
 						</Route>
 						<Route>
 							<h1>Not found!</h1>

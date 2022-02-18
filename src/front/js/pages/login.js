@@ -30,7 +30,7 @@ const Login = () => {
       };
   
       fetch(
-        "https://3001-besmarques-4geeksacademy-9kv25gh9qs3.ws-eu31.gitpod.io/api/protected",
+        "https://3001-besmarques-4geeksacademy-6xuxswokkqq.ws-eu32.gitpod.io/api/protected",
         requestOptions
       )
         .then((response) => response.text())
@@ -52,7 +52,7 @@ const Login = () => {
       };
   
       fetch(
-        "https://3001-besmarques-4geeksacademy-9kv25gh9qs3.ws-eu31.gitpod.io/api/protected",
+        "https://3001-besmarques-4geeksacademy-6xuxswokkqq.ws-eu32.gitpod.io/api/protected",
         requestOptions
       )
         .then((response) => response.text())

@@ -8,6 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 api = Blueprint('api', __name__)
@@ -21,6 +22,40 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+
+@api.route('/users', methods=['Post', 'Get'])
+def create_user():
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
+
+    password_hash = generate_password_hash(password)
+
+    user = User(
+        email = email.
+        password = password_hash.
+        is_active = False
+    )
+
+    user.create()
+
+    return jsonify(user.serialize())
+    
+
+@api.route('/login', methods=['Post', 'Get'])
+def login():
+    email = request.json.get('email', None)
+    password = request.json.get('password', None)
+
+    user = User.get_by_email(email)
+
+    if user and check_password_hash(user.password, password):
+        token = create_access_token(identity=email)
+        return {"token": token}
+    else:
+        return{'error':'user and password not valid', 400}
+
+
 
 @api.route('/token', methods=['POST', 'GET'])
 def create_token():
