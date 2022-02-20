@@ -24,7 +24,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-@api.route('/users', methods=['Post', 'Get'])
+@api.route('/signup', methods=['Post'])
 def create_user():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
@@ -32,8 +32,8 @@ def create_user():
     password_hash = generate_password_hash(password)
 
     user = User(
-        email = email.
-        password = password_hash.
+        email = email,
+        password = password_hash,
         is_active = False
     )
 
@@ -42,7 +42,7 @@ def create_user():
     return jsonify(user.serialize())
     
 
-@api.route('/login', methods=['Post', 'Get'])
+@api.route('/login', methods=['Post'])
 def login():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
@@ -53,7 +53,7 @@ def login():
         token = create_access_token(identity=email)
         return {"token": token}
     else:
-        return{'error':'user and password not valid', 400}
+        return {"error":"user and password not valid"},400
 
 
 
@@ -70,6 +70,6 @@ def create_token():
 @api.route("/protected", methods=["GET"])
 @jwt_required()
 def protected():
-    # Access the identity of the current user with get_jwt_identity
+    #Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200

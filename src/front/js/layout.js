@@ -10,7 +10,8 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 
-import Login from "./pages/login.js";
+import Login from "./pages/login.jsx";
+import Signup from "./pages/signup.jsx";
 import Private from "./pages/private.jsx";
 
 import Protected from "./pages/protected.jsx";
@@ -38,6 +39,9 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/login">
 							<Login />
+						</Route>
+						<Route exact path="/signup">
+							<Signup />
 						</Route>
 						<Route exact path="/private">
 							<Private />
