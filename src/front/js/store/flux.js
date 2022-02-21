@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			user: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -37,11 +38,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const demo = store.demo.map((elm, i) => {
 					if (i === index) elm.background = color;
 					return elm;
-				});
-
+				})
+				
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			createUser: (user,password) => {
+				const store = getStore(user, password);
+				console.log(user,password);
+				fetch("https://3001-besmarques-4geeksacademy-twkh1zos83e.ws-eu33.gitpod.io/api/signup" , {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+				})
+					.then((resp) => {
+						return resp.json();
+					})
+					.then(data => {
+						//return data;
+						"user": user,
+						"password": password
+
+						setStore({user : dataGathered});
+					})
+				   
+			},
 		}
 	};
 };
