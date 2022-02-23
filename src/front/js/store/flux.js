@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: null,
 			message: null,
 			demo: [
 				{
@@ -14,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			user: []
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -43,25 +44,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			createUser: (user,password) => {
-				const store = getStore(user, password);
-				console.log(user,password);
-				fetch("https://3001-besmarques-4geeksacademy-twkh1zos83e.ws-eu33.gitpod.io/api/signup" , {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-				})
-					.then((resp) => {
-						return resp.json();
+			createUser: (email, password) => {
+				const store = getStore();
+				console.log(email,password);
+
+				const post = {
+					method: "Post",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"email": email,
+						"password": password
+					})
+				}
+				fetch("https://3001-besmarques-4geeksacademy-6wvgd743tby.ws-eu33.gitpod.io/api/signup",post)
+					.then(resp => {
+						if (resp.status === 200) return resp.json();
+						else alert("erro");
+					})
+					.then()
+					.catch(error =>{
+						console.error("error catched");
+					})
+				},
+			loginUser: (email, password) => {
+				const store = getStore();
+
+				const post = {
+					method: "Post",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						"email": email,
+						"password": password
+					})
+				}
+				fetch("https://3001-besmarques-4geeksacademy-6wvgd743tby.ws-eu33.gitpod.io/api/login",post)
+					.then(resp => {
+						if (resp.status === 200) return resp.json();
+						else alert("erro");
 					})
 					.then(data => {
-						//return data;
-						"user": user,
-						"password": password
-
-						setStore({user : dataGathered});
+						sessionStorage.setItem("token", data.token);
+						setStore({token:data.token})
 					})
-				   
-			},
+					.catch(error =>{
+						console.error("error catched");
+					})
+				},
+				logoutUser: () => {
+					const store = getStore();
+					sessionStorage.removeItem("token");
+					setStore({token:null})
+				},
+				
 		}
 	};
 };

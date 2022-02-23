@@ -67,7 +67,7 @@ def create_token():
     access_token = create_access_token(identity=username)
     return jsonify(access_token=access_token)
 
-@api.route("/protected", methods=["GET"])
+@api.route("/private", methods=["GET"])
 @jwt_required()
 def protected():
     #Access the identity of the current user with get_jwt_identity

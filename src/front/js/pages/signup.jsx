@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 
 const Signup = () => {
     
-    const [user, setUser] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const { store, actions } = useContext(Context);
@@ -17,13 +17,13 @@ const Signup = () => {
               
                     <div className="mb-3">
                         <label for="exampleInputEmail1" className="form-label text-light">Email address</label>
-                        <input name="email" value={user} onChange={(e) => setUser(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+                        <input name="email" value={email} onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
                     </div>
                     <div className="mb-3">
                         <label for="exampleInputPassword1" className="form-label text-light">Password</label>
                         <input name="password" value={password} onChange={(e) => setPassword(e.target.value)}type="password" className="form-control" id="exampleInputPassword1"></input>
                     </div>
-                    <button type="submit" onClick={() => actions.createUser(user, password)} className="btn btn-light">Submit</button>
+                    <button type="submit" onClick={() => actions.createUser(email, password)} className="btn btn-light">Submit</button>
                
             </div>
             <div className="col-9 pe-2 ps-2 py-5">Signup Now</div>
